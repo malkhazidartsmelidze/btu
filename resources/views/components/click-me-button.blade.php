@@ -1,0 +1,1 @@
+<button onclick="alert('{{ $button_text }}')">Click me</button>
