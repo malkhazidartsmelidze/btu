@@ -9,11 +9,13 @@
   
   @yield('content')
 
-  <footer style="position: absolute; bottom: 0; background: green; color: black; height: 50px; width: 100%;">
-    This is footer | 
+  @if($show_footer)
+    <footer style="position: absolute; bottom: 0; background: green; color: black; height: 50px; width: 100%;">
+      This is footer | 
 
-    @yield('contact-info')
-  </footer>
+      {{ $footer_text_1 }}
+    </footer>
+  @endif
   
 </body>
 </html>
