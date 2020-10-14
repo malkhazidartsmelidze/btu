@@ -1,13 +1,19 @@
 <!DOCTYPE html>
 <html lang="en">
-<head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>@yield('title')</title>
-</head>
-<body style="color: {{ $color }}">
+
+@include('components.head')
+
+<body>
+
   @include('components.menu')
   
   @yield('content')
+
+  <footer style="position: absolute; bottom: 0; background: green; color: black; height: 50px; width: 100%;">
+    This is footer | 
+
+    @yield('contact-info')
+  </footer>
+  
 </body>
 </html>
