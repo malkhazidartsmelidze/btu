@@ -2,6 +2,6 @@
 
 use Illuminate\Support\Facades\Route;
 
-Route::get('/home', '\App\Http\Controllers\PageController@getHomePage');
-Route::get('/contact', '\App\Http\Controllers\PageController@getContactPage');
-Route::get('/about', '\App\Http\Controllers\PageController@getAboutPage');
+
+Route::get('/product/create', '\App\Http\Controllers\ProductController@createproduct');
+Route::get('/product/all', '\App\Http\Controllers\ProductController@viewProducts');
