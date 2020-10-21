@@ -1,0 +1,27 @@
+html,
+body {
+    margin: 0;
+    padding: 0;
+}
+
+.container {
+    width: 80%;
+    display: flex;
+    margin: 0 auto;
+    min-height: 100vh;
+    border: 1px solid black;
+    flex-wrap: wrap;
+}
+
+.product {
+    width: 20%;
+    padding: 10px;
+    height: 300px;
+    min-height: 300px;
+    border: 1px dashed red;
+}
+
+.product .price {
+    font-size: 15px;
+    color: lightcoral;
+}
