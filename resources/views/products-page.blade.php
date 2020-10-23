@@ -1,29 +1,25 @@
-<!DOCTYPE html>
-<html lang="en">
+@extends('layouts.main')
 
-<head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>All Products</title>
-</head>
+@section('content')
+<table class="table">
+  <thead>
+    <th>ID</th>
+    <th>Name</th>
+    <th>Price</th>
+    <th>Stock</th>
+    <th>Sale</th>
+    <th>Date Added</th>
+  </thead>
 
-<body>
-  <table border="1">
+  <?php foreach ($products as $product): ?>
     <tr>
-      <th>სახელი</th>
-      <th>ფასი</th>
-      <th>კატეგორია</th>
+      <td>{{ $product->id }}</td>
+      <td>{{ $product->name }}</td>
+      <td>{{ $product->price }}</td>
+      <td>{{ $product->stock }}</td>
+      <td>{{ $product->sale }}</td>
+      <td>{{ $product->created_at }}</td>
     </tr>
-
-    @foreach($products as $pr)
-    <tr>
-      <td>{{ $pr->name }}</td>
-      <td>{{ $pr->price }}</td>
-      <td>{{ $pr->category }}</td>
-    </tr>
-    @endforeach
-
-  </table>
-</body>
-
-</html>
+  <?php endforeach; ?>
+</table>
+@endsection

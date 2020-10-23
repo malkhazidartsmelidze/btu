@@ -7,21 +7,31 @@ use App\Models\Product;
 
 class ProductController extends Controller
 {
-  public function createProduct()
-  {
-    Product::create([
-      'name' => 'Laptop ' . uniqid(),
-      'price' => rand(100, 1000),
-      'category' => 'Computers'
-    ]);
 
-    return redirect('/product/all');
-  }
-
-  public function viewProducts()
+  public function getAllProducts()
   {
     $products = Product::all();
 
     return view('products-page')->with('products', $products);
+  }
+
+  public function createNewProduct()
+  {
+    return 'This is createNewProduct method';
+  }
+
+  public function editProduct()
+  {
+    return 'This is editProduct method';
+  }
+
+  public function updateProduct()
+  {
+    return 'This is updateProduct method';
+  }
+
+  public function deleteProduct()
+  {
+    return 'This is deleteProduct method';
   }
 }
