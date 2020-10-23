@@ -10,14 +10,22 @@ class ProductController extends Controller
 
   public function getAllProducts()
   {
-    $products = Product::all();
+    $products = Product::orderBy('id', 'DESC')->get();
 
     return view('products-page')->with('products', $products);
   }
 
-  public function createNewProduct()
+  public function saveProduct(Request $request)
   {
-    return 'This is createNewProduct method';
+    Product::create([
+      'name'     => $request->name,
+      'stock'    => $request->stock,
+      'sale'     => $request->sale,
+      'price'    => $request->price,
+      'category' => $request->category
+    ]);
+
+    return redirect('/product/all');
   }
 
   public function editProduct()
@@ -30,8 +38,10 @@ class ProductController extends Controller
     return 'This is updateProduct method';
   }
 
-  public function deleteProduct()
+  public function deleteProduct(Request $request)
   {
-    return 'This is deleteProduct method';
+    Product::where('id', $request->product_id)->delete();
+
+    return redirect()->back();
   }
 }
