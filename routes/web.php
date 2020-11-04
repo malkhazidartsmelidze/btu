@@ -2,10 +2,8 @@
 
 use Illuminate\Support\Facades\Route;
 
-Route::get('/products', '\App\Http\Controllers\ProductController@index');
-Route::get('/products/edit', '\App\Http\Controllers\ProductController@edit');
-Route::get('/products/read', '\App\Http\Controllers\ProductController@read');
-Route::get('/products/update', '\App\Http\Controllers\ProductController@update');
-Route::get('/products/delete', '\App\Http\Controllers\ProductController@delete');
-Route::get('/products/create', '\App\Http\Controllers\ProductController@create');
-Route::post('/products/store', '\App\Http\Controllers\ProductController@store');
+Route::get('/product', '\App\Http\Controllers\ProductController@index')->name('products.index');
+Route::get('/product/editsomeproduct', '\App\Http\Controllers\ProductController@edit')->name('products.edit');
+Route::post('/product/update', '\App\Http\Controllers\ProductController@update')->name('products.update');
+Route::post('/product/delete', '\App\Http\Controllers\ProductController@delete')->name('products.delete');
+Route::post('/product/store', '\App\Http\Controllers\ProductController@store')->name('products.store');

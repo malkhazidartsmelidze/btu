@@ -5,7 +5,7 @@
   <div class="card-header">
     Create Product
   </div>
-  <form action="/products/store" method="post">
+  <form action="{{ route('products.store') }}" method="post">
     @csrf
     
     <div class="card-body">
@@ -42,7 +42,8 @@
           <th>Name</th>
           <th>Price</th>
           <th>Category</th>
-          <th>Actions</th>
+          <th>Delete</th>
+          <th>Edit</th>
         </tr>
       </thead>
       <tbody>
@@ -53,7 +54,14 @@
             <td>{{ $product->price }}</td>
             <td>{{ $product->category }}</td>
             <td>
-              <a href="/products/delete?product_id={{ $product->id }}">Delete</a>
+              <form action="{{ route('products.delete') }}" method="post">
+                @csrf
+                <input type="hidden" value="{{ $product->id }}" name="product_id" />
+                <button class="btn btn-danger">Delete</button>
+              </form>
+            </td>
+            <td>
+              <a href="{{ route('products.edit') }}?product_id={{ $product->id }}">Edit</a>
             </td>
           </tr>
         @endforeach

@@ -21,11 +21,6 @@ class ProductController extends Controller
     return view('edit-product')->with('product', $product);
   }
 
-  public function read()
-  {
-    return 'This is @readmethod';
-  }
-
   public function update(Request $request)
   {
     Product::where('id', $request->id)->update([
@@ -41,12 +36,7 @@ class ProductController extends Controller
   {
     Product::where('id', $request->product_id)->delete();
 
-    return redirect('/products');
-  }
-
-  public function create()
-  {
-    return 'This is @createmethod';
+    return redirect()->route('products.all');
   }
 
   public function store(Request $request)
@@ -57,6 +47,6 @@ class ProductController extends Controller
       'category' => $request->input('category'),
     ]);
 
-    return redirect('/products');
+    return redirect()->route('products.all');
   }
 }

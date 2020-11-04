@@ -6,7 +6,8 @@
     <h3>Edit Product</h3>
   </div>
 
-  <form action="/products/update">
+  <form action="{{ route('products.update') }}" method="post">
+    @csrf
     <input type="hidden" name="id" value="{{ $product->id }}">
 
     <div class="card-body">
