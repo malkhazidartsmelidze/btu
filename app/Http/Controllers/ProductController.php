@@ -14,14 +14,27 @@ class ProductController extends Controller
     return view('all-products')->with('products', $products);
   }
 
+  public function edit(Request $request)
+  {
+    $product = Product::where('id', $request->product_id)->first();
+
+    return view('edit-product')->with('product', $product);
+  }
+
   public function read()
   {
     return 'This is @readmethod';
   }
 
-  public function update()
+  public function update(Request $request)
   {
-    return 'This is @updatemethod';
+    Product::where('id', $request->id)->update([
+      'name'     => $request->name,
+      'price'    => $request->price,
+      'category' => $request->category
+    ]);
+
+    return redirect()->back();
   }
 
   public function delete(Request $request)
