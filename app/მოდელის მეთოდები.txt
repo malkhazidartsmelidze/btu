@@ -30,3 +30,9 @@ Product::select('id', 'name', 'price')
 //   შედარების ოპერაცია,
 //   მნიშვნელობა რომლითაც უნდა გაიფილტროს
 // )
+
+// SELECT id, name, price FROM products WHERE name LIKE '%product%'
+// SELECT id, name, price FROM products WHERE name LIKE 'product%'
+// SELECT id, name, price FROM products WHERE name LIKE '%product'
+// SELECT id, name, price FROM products WHERE name LIKE 'product'
+// SELECT id, name, price FROM products WHERE name LIKE '%p%r%'

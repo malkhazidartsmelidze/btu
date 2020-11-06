@@ -9,9 +9,31 @@ class ProductController extends Controller
 {
   public function index(Request $request)
   {
-    $products = Product::all();
+    $products = Product::query();
 
-    return view('all-products')->with('products', $products);
+    if ($request->id) {
+      $products->where('id', $request->id);
+    }
+
+    if ($request->min_price) {
+      $products->where('price', '>=', $request->min_price);
+    }
+
+    if ($request->max_price) {
+      $products->where('price', '<=', $request->max_price);
+    }
+
+    if ($request->category) {
+      $products->where('category', 'LIKE', '%' . $request->category . '%');
+    }
+
+    if ($request->name) {
+      $products->where('name', 'LIKE', '%' . $request->name . '%');
+    }
+
+    $products = $products->get();
+
+    return view('all-products')->with('products', $products)->with('filter', $request);
   }
 
   public function edit(Request $request)

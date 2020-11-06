@@ -38,6 +38,16 @@
     <table class="table">
       <thead>
         <tr>
+          <form>
+            <th><input type="number" placeholder="ID Filter" value="{{ $filter->id }}"  name="id" class="form-control"></th>
+            <th><input type="text" placeholder="Name Filter" value="{{ $filter->name }}" name="name" class="form-control"></th>
+            <th><input type="number" placeholder="Min Price" value="{{ $filter->min_price }}" name="min_price" class="form-control"></th>
+            <th><input type="number" placeholder="Max Price" value="{{ $filter->max_price }}" name="max_price" class="form-control"></th>
+            <th><input type="text" placeholder="Category Filter" value="{{ $filter->category }}" name="category" class="form-control"></th>
+            <th><button class="btn btn-primary">Filter</button></th>
+          </form>
+        </tr>
+        <tr>
           <th>ID</th>
           <th>Name</th>
           <th>Price</th>
@@ -46,6 +56,7 @@
           <th>Edit</th>
         </tr>
       </thead>
+      
       <tbody>
         @foreach ($products as $product)
           <tr>
