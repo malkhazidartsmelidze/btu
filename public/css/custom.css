@@ -1,0 +1,99 @@
+.table-sum {
+  color: red;
+  font-weight: bold;
+}
+
+.recache {
+  cursor: pointer;
+}
+
+.treeactions {
+  float: right;
+  padding-right: 10px;
+  padding-left: 10px;
+}
+
+.treeactions span {
+  padding: 5px;
+  cursor: pointer;
+}
+
+.treeactions span:hover,
+.treeactions span.checked {
+  background-color: #dd4b3a;
+  border-radius: 50%;
+  color: white;
+}
+
+.adname {
+  font-size: 14px !important;
+}
+
+.comment-box {
+  border-radius: 20px;
+  padding: 10px 15px;
+  display: inline-block;
+  background-color: silver;
+}
+
+.right-float {
+  clear: both !important;
+  float: right !important;
+}
+
+.left-float {
+  color: #fff;
+  background: rgb(0, 166, 90);
+  clear: both !important;
+  float: left !important;
+}
+
+tr.highlightedtr {
+  background-color: #aeafae !important;
+}
+
+.pointer {
+  cursor: pointer;
+}
+
+.f_larger {
+  font-size: 14px !important;
+}
+
+.select2-selection__clear {
+  color: #f00;
+}
+
+/* Companies list */
+.companies-list {
+  display: flex;
+  flex-wrap: wrap;
+}
+.list-item {
+  cursor: pointer;
+  border-radius: 9px;
+  display: inline-block;
+  margin: 0 0 10px 10px;
+  padding: 1px 7px 2px 7px;
+  border: 1px solid #20598a;
+}
+
+td:first-child label {
+  width: 150px;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  text-align: left;
+  margin: 0;
+  padding: 0.2em 0.6em 0.3em !important;
+  line-height: 1;
+  display: block;
+  background-color: #3c8dbc !important;
+  font-size: 15px !important;
+  cursor: pointer;
+}
+
+td:first-child label:hover {
+  overflow: unset;
+  position: absolute;
+  width: unset;
+}
