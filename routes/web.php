@@ -2,6 +2,21 @@
 
 use Illuminate\Support\Facades\Route;
 use Illuminate\Support\Facades\Auth;
+use App\Http\Controllers\Admin\CategoryController;
+
+Route::get('/', function () {
+  return view('index');
+});
+
+Route::prefix('admin')->middleware('auth')->name('admin.')->group(function () {
+  Route::prefix('category')->name('category.')->group(function () {
+    Route::get('/', [CategoryController::class, 'index'])->name('index');
+    Route::post('/store', [CategoryController::class, 'store'])->name('store');
+    Route::post('/{id}/delete', [CategoryController::class, 'delete'])->name('delete');
+    Route::get('/{id}/edit', [CategoryController::class, 'edit'])->name('edit');
+    Route::post('/{id}/update', [CategoryController::class, 'update'])->name('update');
+  });
+});
 
 Route::get('/products/all', '\App\Http\Controllers\ProductController@getAllProducts')
   ->name('products.all')

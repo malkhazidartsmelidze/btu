@@ -17,11 +17,13 @@ class AuthorizationController extends Controller
       'password' => 'required|min:10|max:20|confirmed'
     ]);
 
-    return User::create([
+    User::create([
       'name' => $request->name,
       'email' => $request->email,
       'password' => bcrypt($request->password)
     ]);
+
+    return redirect()->route('login');
   }
 
   public function login(Request $request)
