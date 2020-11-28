@@ -7,5 +7,5 @@ use Illuminate\Database\Eloquent\Model;
 class Category extends Model
 {
   public $table = 'categories';
-  public $fillable = ['id', 'name'];
+  public $fillable = ['id', 'name', 'slug'];
 }

@@ -14,7 +14,7 @@
                             enctype="multipart/form-data">
                             @csrf
 
-                            @if ($action == 'edit')
+                            @if (isset($post))
                                 <input type="hidden" name="_method" value="PUT" />
                             @endif
 
@@ -53,7 +53,8 @@
                                 <label class="col-md-4 col-form-label text-md-right">Enter Post Category</label>
 
                                 <div class="col-md-6">
-                                    <select name="category_id" class="form-control @error('slug') is-invalid @enderror">
+                                    <select name="category_id"
+                                        class="form-control @error('category_id') is-invalid @enderror">
                                         <option value=""></option>
                                         @foreach ($categories as $cat)
                                             <option @if (isset($post) && $cat->id == $post->category_id)
@@ -109,7 +110,7 @@
                             <div class="form-group row mb-0">
                                 <div class="col-md-8 offset-md-4">
                                     <button type="submit" class="btn btn-primary">
-                                        Create Post
+                                        {{ isset($post) ? 'Edit' : 'Create' }} Post
                                     </button>
                                 </div>
                             </div>

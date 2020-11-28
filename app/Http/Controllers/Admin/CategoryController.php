@@ -4,6 +4,7 @@ namespace App\Http\Controllers\Admin;
 
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
+use Illuminate\Support\Str;
 use App\Models\Category;
 
 class CategoryController extends Controller
@@ -29,11 +30,12 @@ class CategoryController extends Controller
   public function store(Request $request)
   {
     $request->validate([
-      'name' => ['required', 'min:2', 'max:100']
+      'name' => ['required', 'min:2', 'max:100'],
     ]);
 
     Category::create([
       'name' => $request->name,
+      'slug' => Str::slug($request->name)
     ]);
 
     return redirect()->route('admin.category.index');
@@ -67,6 +69,7 @@ class CategoryController extends Controller
 
     Category::where('id', $id)->update([
       'name' => $request->name,
+      'slug' => Str::slug($request->name),
     ]);
 
     return redirect()->route('admin.category.index');

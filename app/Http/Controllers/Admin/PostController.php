@@ -31,7 +31,7 @@ class PostController extends Controller
   {
     $categories = Category::all();
 
-    return view('admin.post.form')->with('categories', $categories)->with('action', 'create');
+    return view('admin.post.form')->with('categories', $categories);
   }
 
   /**
@@ -88,7 +88,7 @@ class PostController extends Controller
     $post = Post::where('id', $id)->first();
     $categories = Category::all();
 
-    return view('admin.post.form')->with('post', $post)->with('categories', $categories)->with('action', 'edit');
+    return view('admin.post.form')->with('post', $post)->with('categories', $categories);
   }
 
   /**
@@ -125,7 +125,7 @@ class PostController extends Controller
     $post->text = $request->text;
     $post->save();
 
-    return redirect()->route('admin.post.index');
+    return redirect()->route('admin.post.edit', ['post' => $post->id]);
   }
 
   /**
