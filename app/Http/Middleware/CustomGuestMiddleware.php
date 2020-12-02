@@ -18,7 +18,7 @@ class CustomGuestMiddleware
   public function handle(Request $request, Closure $next)
   {
     if (Auth::check()) {
-      return redirect()->route('products.all');
+      return redirect()->route('admin.home');
     }
 
     return $next($request);
