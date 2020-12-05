@@ -31,8 +31,7 @@
                 </button>
 
                 <div class="collapse navbar-collapse" id="navbarSupportedContent">
-                    <ul class="navbar-nav mr-auto"></ul>
-                    <ul class="navbar-nav ml-auto"></ul>
+                    @include('admin.partials.menu')
                 </div>
             </div>
         </nav>

@@ -2,7 +2,7 @@
 
 @section('content')
     <div class="row">
-        @foreach ($posts as $post)
+        @foreach ($category->posts as $post)
             @include('components.post', ['post' => $post])
         @endforeach
     </div>
