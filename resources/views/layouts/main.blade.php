@@ -15,7 +15,8 @@
 <body>
 
     <header>
-        @include('layouts.partials.menu')
+        <x-menu />
+        {{-- @include('layouts.partials.menu') --}}
     </header>
 
     <main role="main">
@@ -32,12 +33,9 @@
 
     <footer class="text-muted">
         <div class="container">
-            <p class="float-right">
-                <a href="#">Back to top</a>
-            </p>
-            <p>Album example is &copy; Bootstrap, but please download and customize it for yourself!</p>
-            <p>New to Bootstrap? <a href="../../">Visit the homepage</a> or read our <a
-                    href="../../getting-started/">getting started guide</a>.</p>
+            <p class="float-right"> <a href="#">Back to top</a> </p>
+            <p>{{ config('bottom_text_1') }}</p>
+            <p>{{ config('bottom_text_2') }}</p>
         </div>
     </footer>
 

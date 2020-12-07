@@ -26,8 +26,7 @@ class PageController extends Controller
   public function singleCategory($slug)
   {
     $category = Category::where('slug', $slug)->first();
-    $posts = Post::where('category_id', $category->id)->with('category')->get();
 
-    return view('pages.index')->with('posts', $posts);
+    return view('pages.category')->with('posts', $category->posts);
   }
 }
