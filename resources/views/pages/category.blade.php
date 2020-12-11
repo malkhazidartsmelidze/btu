@@ -2,8 +2,12 @@
 
 @section('content')
     <div class="row">
-        @foreach ($category->posts as $post)
-            @include('components.post', ['post' => $post])
-        @endforeach
+        @if (!count($category->posts))
+            <div class="alert alert-warning" style="width: 100%">No Posts Found In this category</div>
+        @else
+            @foreach ($category->posts as $post)
+                @include('components.post', ['post' => $post])
+            @endforeach
+        @endif
     </div>
 @endsection

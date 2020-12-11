@@ -107,7 +107,7 @@ class PostController extends Controller
       'slug' => ['nullable', 'max:150'],
       'text' => ['required'],
       'image' => ['nullable', 'image'],
-      'category_id' => ['required', 'numeric'],
+      'category_id' => ['nullable', 'numeric'],
     ]);
 
     if ($request->file('image')) {

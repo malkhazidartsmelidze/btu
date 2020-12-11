@@ -21,7 +21,7 @@
                                 <tr>
                                     <td>{{ $post->id }}</td>
                                     <td>{{ $post->title }}</td>
-                                    <td><img src="{{ url($post->image) }}" width="100" height="100"></td>
+                                    <td><img src="{{ $post->getImageUrl() }}" width="100" height="100"></td>
                                     <td>
                                         <form method="POST"
                                             action="{{ route('admin.post.destroy', ['post' => $post->id]) }}">

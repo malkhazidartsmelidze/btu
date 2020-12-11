@@ -53,7 +53,8 @@
                                 <label class="col-md-4 col-form-label text-md-right">Enter Post Category</label>
 
                                 <div class="col-md-6">
-                                    <select name="category_id" class="form-control @error('slug') is-invalid @enderror">
+                                    <select name="category_id"
+                                        class="form-control @error('category_id') is-invalid @enderror">
                                         <option value=""></option>
                                         @foreach ($categories as $cat)
                                             <option @if (isset($post) && $cat->id == $post->category_id)
@@ -76,7 +77,7 @@
 
                                 <div class="col-md-6">
                                     @if (isset($post))
-                                        <img src="{{ url($post->image) }}" width="100" height="100"
+                                        <img src="{{ $post->getImageUrl() }}" width="100" height="100"
                                             style="padding-bottom: 10px;">
                                     @endif
                                     <input type="file" class="form-file-control @error('image') is-invalid @enderror"
@@ -109,7 +110,7 @@
                             <div class="form-group row mb-0">
                                 <div class="col-md-8 offset-md-4">
                                     <button type="submit" class="btn btn-primary">
-                                        Create Post
+                                        {{ isset($post) ? 'Update' : 'Create' }} Post
                                     </button>
                                 </div>
                             </div>
