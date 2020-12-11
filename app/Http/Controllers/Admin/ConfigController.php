@@ -3,11 +3,11 @@
 namespace App\Http\Controllers\Admin;
 
 use App\Http\Controllers\Controller;
-use App\Models\Category;
+use App\Models\Config;
 use Illuminate\Http\Request;
 use Illuminate\Support\Str;
 
-class CategoryController extends Controller
+class ConfigController extends Controller
 {
   /**
    * Display a listing of the resource.
@@ -16,10 +16,10 @@ class CategoryController extends Controller
    */
   public function index()
   {
-    $categories = Category::all();
+    $configs = Config::all();
 
-    return view('admin.category.index', [
-      'categories' => $categories
+    return view('admin.config.index', [
+      'configs' => $configs
     ]);
   }
 
@@ -30,7 +30,7 @@ class CategoryController extends Controller
    */
   public function create()
   {
-    return view('admin.category.form');
+    return view('admin.config.form');
   }
 
   /**
@@ -45,12 +45,12 @@ class CategoryController extends Controller
       'name'       => ['required', 'min:3', 'max:150'],
     ]);
 
-    Category::create([
+    Config::create([
       'name'       => $request->name,
-      'slug'       => Str::slug($request->name),
+      'value'      => $request->value
     ]);
 
-    return redirect()->route('admin.category.index');
+    return redirect()->route('admin.config.index');
   }
 
   /**
@@ -72,10 +72,10 @@ class CategoryController extends Controller
    */
   public function edit($id)
   {
-    $category = Category::where('id', $id)->first();
+    $config = Config::where('id', $id)->first();
 
-    return view('admin.category.form', [
-      'category' => $category
+    return view('admin.config.form', [
+      'config' => $config
     ]);
   }
 
@@ -92,14 +92,14 @@ class CategoryController extends Controller
       'name'       => ['required', 'min:3', 'max:150'],
     ]);
 
-    $category = Category::where('id', $id)->first();
+    $config = Config::where('id', $id)->first();
 
-    $category->update([
+    $config->update([
       'name'       => $request->name,
-      'slug'       => Str::slug($request->name),
+      'value'       => $request->value
     ]);
 
-    return redirect()->route('admin.category.index');
+    return redirect()->route('admin.config.index');
   }
 
   /**
@@ -110,8 +110,8 @@ class CategoryController extends Controller
    */
   public function destroy($id)
   {
-    Category::where('id', $id)->delete();
+    Config::where('id', $id)->delete();
 
-    return redirect()->route('admin.category.index');
+    return redirect()->route('admin.config.index');
   }
 }

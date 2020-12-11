@@ -6,31 +6,29 @@
         <div class="row justify-content-center">
             <div class="col-md-10">
                 <div class="card">
-                    <div class="card-header">Posts</div>
+                    <div class="card-header">Configs</div>
 
                     <div class="card-body">
                         <table class="table">
                             <tr>
                                 <th>ID</th>
-                                <th>Title</th>
-                                <th>Slug</th>
-                                <th>Image</th>
+                                <th>Name</th>
+                                <th>Value</th>
                                 <th>Actions</th>
                             </tr>
 
-                            @foreach ($posts as $post)
+                            @foreach ($configs as $config)
                                 <tr>
-                                    <td>{{ $post->id }}</td>
-                                    <td>{{ $post->title }}</td>
-                                    <td>{{ $post->slug }}</td>
-                                    <td><img src="{{ url($post->image) }}" width="100" height="100"></td>
+                                    <td>{{ $config->id }}</td>
+                                    <td>{{ $config->name }}</td>
+                                    <td>{{ $config->value }}</td>
                                     <td>
                                         <form method="POST"
-                                            action="{{ route('admin.post.destroy', ['post' => $post->id]) }}">
+                                            action="{{ route('admin.config.destroy', ['config' => $config->id]) }}">
                                             @csrf
                                             @method('DELETE')
                                             <button class="btn btn-sm btn-danger">Delete</button>
-                                            <a href="{{ route('admin.post.edit', ['post' => $post->id]) }}"
+                                            <a href="{{ route('admin.config.edit', ['config' => $config->id]) }}"
                                                 class="btn btn-sm btn-success">Edit</a>
                                         </form>
                                     </td>

@@ -2,6 +2,7 @@
 
 use App\Http\Controllers\Admin\AdminController;
 use App\Http\Controllers\Admin\CategoryController;
+use App\Http\Controllers\Admin\ConfigController;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\AuthController;
 use App\Http\Controllers\Admin\PostController;
@@ -9,12 +10,15 @@ use App\Http\Controllers\PageController;
 
 Route::name('front.')->group(function () {
   Route::get('/', [PageController::class, 'index']);
+  Route::get('/post/{slug}', [PageController::class, 'singlePost'])->name('single-post');
+  Route::get('/category/{slug}', [PageController::class, 'category'])->name('category');
 });
 
 Route::name('admin.')->prefix('admin')->middleware('custom_auth')->group(function () {
   Route::get('/', [AdminController::class, 'index'])->name('home');
   Route::resource('/post', PostController::class);
   Route::resource('/category', CategoryController::class);
+  Route::resource('/config', ConfigController::class);
 });
 
 Route::prefix('custom')

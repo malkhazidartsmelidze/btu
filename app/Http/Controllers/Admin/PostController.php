@@ -3,6 +3,7 @@
 namespace App\Http\Controllers\Admin;
 
 use App\Http\Controllers\Controller;
+use App\Models\Category;
 use App\Models\Post;
 use Illuminate\Http\Request;
 use Illuminate\Support\Str;
@@ -16,7 +17,11 @@ class PostController extends Controller
    */
   public function index()
   {
-    return view('admin.post.index');
+    $posts = Post::all();
+
+    return view('admin.post.index', [
+      'posts' => $posts
+    ]);
   }
 
   /**
@@ -26,7 +31,11 @@ class PostController extends Controller
    */
   public function create()
   {
-    return view('admin.post.create');
+    $categories = Category::all();
+
+    return view('admin.post.form', [
+      'categories' => $categories,
+    ]);
   }
 
   /**
@@ -44,14 +53,22 @@ class PostController extends Controller
       'category_id' => ['nullable', 'numeric'],
       'image'       => ['required', 'image'],
     ]);
-    dd($request);
+
+    $image = $request->file('image');
+    $filename = time() . '-' . $image->getClientOriginalName();
+    $dir = public_path('post-images');
+    $image->move($dir, $filename);
+    $image_url = "/post-images/$filename";
+
     Post::create([
       'title'       => $request->title,
       'slug'        => Str::slug($request->slug ? $request->slug : $request->title),
       'text'        => $request->text,
       'category_id' => $request->category_id,
-      'image'       => $request->image,
+      'image'       => $image_url,
     ]);
+
+    return redirect()->route('admin.post.index');
   }
 
   /**
@@ -73,7 +90,13 @@ class PostController extends Controller
    */
   public function edit($id)
   {
-    return view('admin.post.edit');
+    $post = Post::where('id', $id)->first();
+    $categories = Category::all();
+
+    return view('admin.post.form', [
+      'post' => $post,
+      'categories' => $categories,
+    ]);
   }
 
   /**
@@ -85,7 +108,33 @@ class PostController extends Controller
    */
   public function update(Request $request, $id)
   {
-    //
+    $request->validate([
+      'title'       => ['required', 'min:3', 'max:255'],
+      'slug'        => ['nullable', 'min:3', 'max:255'],
+      'text'        => ['required', 'min:3'],
+      'category_id' => ['nullable', 'numeric'],
+      'image'       => ['nullable', 'image'],
+    ]);
+
+    $post = Post::where('id', $id)->first();
+
+    if ($request->file('image')) {
+      $image = $request->file('image');
+      $filename = time() . '-' . $image->getClientOriginalName();
+      $dir = public_path('post-images');
+      $image->move($dir, $filename);
+      $image_url = "/post-images/$filename";
+    }
+
+    $post->update([
+      'title'       => $request->title,
+      'slug'        => Str::slug($request->slug ? $request->slug : $request->title),
+      'text'        => $request->text,
+      'category_id' => $request->category_id,
+      'image'       => isset($image_url) ? $image_url : $post->image
+    ]);
+
+    return redirect()->route('admin.post.index');
   }
 
   /**
@@ -96,6 +145,8 @@ class PostController extends Controller
    */
   public function destroy($id)
   {
-    //
+    Post::where('id', $id)->delete();
+
+    return redirect()->route('admin.post.index');
   }
 }

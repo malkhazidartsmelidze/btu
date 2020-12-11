@@ -12,25 +12,23 @@
                         <table class="table">
                             <tr>
                                 <th>ID</th>
-                                <th>Title</th>
+                                <th>Name</th>
                                 <th>Slug</th>
-                                <th>Image</th>
                                 <th>Actions</th>
                             </tr>
 
-                            @foreach ($posts as $post)
+                            @foreach ($categories as $cat)
                                 <tr>
-                                    <td>{{ $post->id }}</td>
-                                    <td>{{ $post->title }}</td>
-                                    <td>{{ $post->slug }}</td>
-                                    <td><img src="{{ url($post->image) }}" width="100" height="100"></td>
+                                    <td>{{ $cat->id }}</td>
+                                    <td>{{ $cat->name }}</td>
+                                    <td>{{ $cat->slug }}</td>
                                     <td>
                                         <form method="POST"
-                                            action="{{ route('admin.post.destroy', ['post' => $post->id]) }}">
+                                            action="{{ route('admin.category.destroy', ['category' => $cat->id]) }}">
                                             @csrf
                                             @method('DELETE')
                                             <button class="btn btn-sm btn-danger">Delete</button>
-                                            <a href="{{ route('admin.post.edit', ['post' => $post->id]) }}"
+                                            <a href="{{ route('admin.category.edit', ['category' => $cat->id]) }}"
                                                 class="btn btn-sm btn-success">Edit</a>
                                         </form>
                                     </td>
