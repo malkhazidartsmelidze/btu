@@ -38,7 +38,7 @@ class CategoryController extends Controller
       'slug' => Str::slug($request->name)
     ]);
 
-    return redirect()->route('admin.category.index');
+    return response()->json([], 200);
   }
 
   /**
@@ -50,8 +50,11 @@ class CategoryController extends Controller
   public function edit($id)
   {
     $category = Category::where('id', $id)->first();
+    $categories = Category::all();
 
-    return view('admin.category.edit')->with('category', $category);
+    return view('admin.category.edit')
+      ->with('categories', $categories)
+      ->with('category', $category);
   }
 
   /**
@@ -72,7 +75,7 @@ class CategoryController extends Controller
       'slug' => Str::slug($request->name),
     ]);
 
-    return redirect()->route('admin.category.index');
+    return response()->json([], 200);
   }
 
   /**
@@ -85,6 +88,6 @@ class CategoryController extends Controller
   {
     Category::where('id', $id)->delete();
 
-    return redirect()->route('admin.category.index');
+    return response()->json([], 200);
   }
 }

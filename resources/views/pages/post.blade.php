@@ -1,5 +1,3 @@
-<?php
-use App\Models\Category; ?>
 @extends('layouts.main')
 
 @section('content')

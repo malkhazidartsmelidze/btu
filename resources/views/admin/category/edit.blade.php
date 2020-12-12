@@ -9,15 +9,13 @@
                     <div class="card-header">Create Category</div>
 
                     <div class="card-body">
-                        <form method="POST" action="{{ route('admin.category.update', ['category' => $category->id]) }}">
-                            @csrf
-                            <input type="hidden" name="_method" value="PUT" />
-
+                        <form method="POST" onsubmit="editCategory(event)">
                             <div class="form-group row">
                                 <label for="email" class="col-md-4 col-form-label text-md-right">Enter Category Name</label>
 
                                 <div class="col-md-6">
-                                    <input type="text" class="form-control @error('name') is-invalid @enderror" name="name"
+                                    <input type="text" id="category-name-input"
+                                        class="form-control @error('name') is-invalid @enderror" name="name"
                                         value="{{ $category->name }}" requiredautofocus>
 
                                     @error('name')
@@ -39,8 +37,27 @@
                     </div>
                 </div>
             </div>
+            <div class="col-md-6">
+                @include('admin.category.table', ['categories' => $categories])
+            </div>
         </div>
     </div>
-
-
 @endsection
+
+<script>
+    function editCategory(e) {
+        e.preventDefault();
+        var data = $(e.target).serialize();
+        $.ajax({
+            url: "{{ route('admin.category.update', ['category' => $category->id]) }}?" + data,
+            type: 'PUT',
+            success: function(data) {
+                refreshCategories()
+            },
+            error: function() {
+                console.error('error happened');
+            }
+        })
+    }
+
+</script>
