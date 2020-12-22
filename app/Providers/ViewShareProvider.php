@@ -26,6 +26,8 @@ class ViewShareProvider extends ServiceProvider
    */
   public function boot()
   {
+    if (app()->runningInConsole()) return;
+
     $categories = Category::all();
     $configs = Config::all()->pluck('value', 'name')->toArray();
 
