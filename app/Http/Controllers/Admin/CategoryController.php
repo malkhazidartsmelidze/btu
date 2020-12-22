@@ -30,7 +30,11 @@ class CategoryController extends Controller
    */
   public function create()
   {
-    return view('admin.category.form');
+    $categories = Category::all();
+
+    return view('admin.category.form', [
+      'categories' => $categories
+    ]);
   }
 
   /**
@@ -50,7 +54,10 @@ class CategoryController extends Controller
       'slug'       => Str::slug($request->name),
     ]);
 
-    return redirect()->route('admin.category.index');
+    return [
+      'success' => true,
+      'message' => 'Category Succesfully Created'
+    ];
   }
 
   /**
@@ -72,10 +79,12 @@ class CategoryController extends Controller
    */
   public function edit($id)
   {
+    $categories = Category::all();
     $category = Category::where('id', $id)->first();
 
     return view('admin.category.form', [
-      'category' => $category
+      'category' => $category,
+      'categories' => $categories
     ]);
   }
 
@@ -99,7 +108,10 @@ class CategoryController extends Controller
       'slug'       => Str::slug($request->name),
     ]);
 
-    return redirect()->route('admin.category.index');
+    return [
+      'success' => true,
+      'message' => 'Category Succesfully changed with: ' . $request->name
+    ];
   }
 
   /**
@@ -112,6 +124,9 @@ class CategoryController extends Controller
   {
     Category::where('id', $id)->delete();
 
-    return redirect()->route('admin.category.index');
+    return response()->json([
+      'success' => true,
+      'message' => 'Category Succesfully deleted'
+    ]);
   }
 }

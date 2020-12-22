@@ -2,27 +2,25 @@
 
 @section('content')
     <div class="row justify-content-center">
-        <div class="col-md-10">
+        <div class="col-md-6">
+            @include('admin.category.table', ['categories' => $categories])
+        </div>
+        <div class="col-md-6">
             <div class="card">
                 <div class="card-header">Create New Category</div>
 
                 <div class="card-body">
-                    <form method="POST"
-                        action="{{ isset($category) ? route('admin.category.update', ['category' => $category->id]) : route('admin.category.store') }}"
-                        enctype="multipart/form-data">
-
-                        @csrf
-                        @if (isset($category))
-                            @method('PUT')
-                        @endif
+                    <form method="{{ isset($category) ? 'PUT' : 'POST' }}" onsubmit="categoryFormSubmitted(event)"
+                        action="{{ isset($category) ? route('admin.category.update', ['category' => $category->id]) : route('admin.category.store') }}">
 
                         <div class="form-group row">
                             <label for="email" class="col-md-4 col-form-label text-md-right">Enter Category Name</label>
 
                             <div class="col-md-6">
-                                <input type="text" class="form-control @error('name') is-invalid @enderror" name="name"
-                                    value="{{ isset($category) ? $category->name : old('name') }}" required
-                                    autocomplete="name" autofocus>
+                                <input id="category-name-input" type="text"
+                                    class="form-control @error('name') is-invalid @enderror" name="name"
+                                    value="{{ isset($category) ? $category->name : old('name') }}" autocomplete="name"
+                                    autofocus>
 
                                 @error('name')
                                     <span class="invalid-feedback" role="alert">
@@ -42,4 +40,22 @@
             </div>
         </div>
     </div>
+
+    <script>
+        function categoryFormSubmitted(e) {
+            e.preventDefault();
+
+            $.ajax({
+                url: e.target.getAttribute('action'),
+                type: e.target.getAttribute('method'),
+                data: {
+                    name: $('#category-name-input').val()
+                },
+                success: function(data) {
+                    refreshCategoryTable();
+                }
+            })
+        }
+
+    </script>
 @endsection

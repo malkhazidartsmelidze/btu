@@ -18,7 +18,7 @@ class PageController extends Controller
 
   public function category($slug)
   {
-    $category = Category::where('slug', $slug)->with('posts')->first();
+    $category = Category::where('slug', $slug)->with('posts')->firstOrFail();
 
     return view('pages.category', ['category' => $category]);
   }
@@ -26,7 +26,7 @@ class PageController extends Controller
 
   public function singlePost($slug)
   {
-    $post = Post::where('slug', $slug)->first();
+    $post = Post::where('slug', $slug)->firstOrFail();
 
     return view('pages.single-post', ['post' => $post]);
   }

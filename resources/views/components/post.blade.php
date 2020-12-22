@@ -9,8 +9,8 @@
                     <a href="{{ route('front.single-post', ['slug' => $post->slug]) }}"
                         class="btn btn-sm btn-outline-secondary">View</a>
 
-                    <a href="{{ route('front.category', ['slug' => $post->category->slug]) }}"
-                        class="btn btn-sm btn-outline-secondary">{{ $post->category->name }}</a>
+                    <a href="{{ route('front.category', ['slug' => $post->category ? $post->category->slug : 'nocat']) }}"
+                        class="btn btn-sm btn-outline-secondary">{{ $post->category ? $post->category->name : 'No <Caategory></Caategory>' }}</a>
                 </div>
                 <small class="text-muted">9 mins</small>
             </div>
