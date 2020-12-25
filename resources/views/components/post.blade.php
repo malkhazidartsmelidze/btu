@@ -9,9 +9,9 @@
                     <a href="{{ route('front.post', ['slug' => $post->slug]) }}"
                         class="btn btn-sm btn-outline-secondary">View</a>
 
-                    <a href="{{ $post->category ? route('front.category', ['slug' => $post->category->slug]) : '#' }}"
+                    <a href="{{ route('front.category', ['slug' => $post->category_slug]) }}"
                         class="btn btn-sm btn-outline-secondary">
-                        {{ optional($post->category)->name ?? 'No Cateogry' }}
+                        {{ $post->category_name }}
                     </a>
                 </div>
                 <small class="text-muted">{{ $post->created_at->diffInMinutes(now()) }} min</small>
