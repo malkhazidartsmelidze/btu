@@ -9,8 +9,8 @@
                     <a href="{{ route('front.post', ['slug' => $post->slug]) }}"
                         class="btn btn-sm btn-outline-secondary">View</a>
 
-                    <a href="{{ route('front.category', ['slug' => $post->category ? $post->category->slug : 'default']) }}"
-                        class="btn btn-sm btn-outline-secondary">{{ $post->category ? $post->category->name : 'No Categeory' }}</a>
+                    <a href="{{ route('front.category', ['slug' => $post->category_slug ?? 'defaultslug']) }}"
+                        class="btn btn-sm btn-outline-secondary">{{ $post->category_name ?? 'NoCategory' }}</a>
                 </div>
                 <small class="text-muted">{{ $post->created_at->diffForHumans(now()) }}</small>
             </div>

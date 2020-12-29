@@ -8,6 +8,9 @@ use App\Http\Controllers\Admin\PostController;
 use App\Http\Controllers\PageController;
 use App\Http\Middleware\FrontMiddleware;
 
+Route::view('testrequest', 'testrequest');
+Route::post('testrequestpost', [PageController::class, 'testRequestPost']);
+
 Route::name('front.')->middleware(FrontMiddleware::class)->group(function () {
   Route::get('/', [PageController::class, 'home'])->name('index');
   Route::get('/post/{slug}', [PageController::class, 'singlePost'])->name('post');
