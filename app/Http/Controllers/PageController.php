@@ -2,17 +2,20 @@
 
 namespace App\Http\Controllers;
 
-use App\Http\Requests\SaveUserRequest;
 use App\Models\Category;
 use App\Models\Post;
+use App\Http\Requests\SaveUserRequest;
 use Illuminate\Http\Request;
+use Illuminate\Support\Str;
 
 class PageController extends Controller
 {
-  public function testRequestPost(SaveUserRequest $request)
+
+  public function testRequestPost(Category $cat, Post $p)
   {
-    dd($request->getName());
-    dd($request);
+    dd($p->getNameColumn(), $cat->getNameColumn());
+    // dd($request->getNameParameterAndConverToUpper());
+    // dd(Str::joinAndSnake('Post::lef|tJoin(categories)', 'StrtoJoin'));
   }
 
   public function home()

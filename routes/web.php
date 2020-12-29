@@ -9,7 +9,7 @@ use App\Http\Controllers\PageController;
 use App\Http\Middleware\FrontMiddleware;
 
 Route::view('testrequest', 'testrequest');
-Route::post('testrequestpost', [PageController::class, 'testRequestPost']);
+Route::get('testrequestpost', [PageController::class, 'testRequestPost']);
 
 Route::name('front.')->middleware(FrontMiddleware::class)->group(function () {
   Route::get('/', [PageController::class, 'home'])->name('index');
